@@ -2,26 +2,33 @@ package com.traffic.app.model;
 
 public class Road {
     private String name;
-    private int vehicleCount;
+    private volatile int vehicleCount; // Current number of cars
 
     public Road(String name) {
         this.name = name;
         this.vehicleCount = 0;
     }
 
-    public String getName() {
-        return name;
+    // Synchronized: Prevents race conditions between Generator Thread and Traffic Flow Thread
+    public synchronized void addVehicles(int count) {
+        this.vehicleCount += count;
     }
 
-    public synchronized int getVehicleCount() {
+    // Synchronized: Ensures we don't remove more cars than exist
+    public synchronized void removeVehicles(int count) {
+        if (this.vehicleCount >= count) {
+            this.vehicleCount -= count;
+        } else {
+            this.vehicleCount = 0;
+        }
+    }
+
+    public int getVehicleCount() {
         return vehicleCount;
     }
-
-    public synchronized void addVehicles(int count) {
-        vehicleCount = Math.min(10, vehicleCount + count);
-    }
-
-    public synchronized void removeVehicles(int count) {
-        vehicleCount = Math.max(0, vehicleCount - count);
+    
+    // Optional: useful for debugging
+    public String getName() {
+        return name;
     }
 }

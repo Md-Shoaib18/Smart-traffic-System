@@ -1,18 +1,32 @@
 package com.traffic.app.model;
 
 public class TrafficLight {
-    public enum Color { GREEN, YELLOW, RED }
+    
+    // Enum for type safety
+    public enum Color { RED, YELLOW, GREEN }
 
-    private Color color;
-    private int remainingTime; // seconds for current color
+    // volatile ensures visibility across threads (Controller reading vs SignalService writing)
+    private volatile Color color;
+    private volatile int timeLeft;
 
-    public TrafficLight(Color initialColor) {
-        this.color = initialColor;
-        this.remainingTime = 0;
+    public TrafficLight(Color color) {
+        this.color = color;
+        this.timeLeft = 0;
     }
 
-    public synchronized Color getColor() { return color; }
-    public synchronized void setColor(Color color) { this.color = color; }
-    public synchronized int getRemainingTime() { return remainingTime; }
-    public synchronized void setRemainingTime(int time) { this.remainingTime = time; }
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public int getTimeLeft() {
+        return timeLeft;
+    }
+
+    public void setTimeLeft(int timeLeft) {
+        this.timeLeft = timeLeft;
+    }
 }

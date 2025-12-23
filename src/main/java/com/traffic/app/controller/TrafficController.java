@@ -1,23 +1,29 @@
 package com.traffic.app.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 import com.traffic.app.service.SignalService;
-import com.traffic.app.model.TrafficStatus;
-
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
+@RequestMapping("/status") // keeping base path
 public class TrafficController {
 
-    private final SignalService signalService;
+    @Autowired
+    private SignalService signalService;
 
-    public TrafficController(SignalService signalService) {
-        this.signalService = signalService;
+    @GetMapping
+    public Map<String, Object> getStatus() {
+        Map<String, Object> response = new HashMap<>();
+        response.put("lights", signalService.getLights());
+        response.put("roads", signalService.getRoads());
+        return response;
     }
 
-    @GetMapping("/status")
-    public TrafficStatus getStatus() {
-        return new TrafficStatus(signalService.getLights(), signalService.getRoads());
+    @PostMapping("/emergency/{roadId}")
+    public String triggerEmergency(@PathVariable int roadId) {
+        signalService.triggerEmergency(roadId);
+        return "Emergency Triggered for Road " + roadId;
     }
 }
