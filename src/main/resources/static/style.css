@@ -1,0 +1,98 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    text-align: center;
+    background: #eef2f3;
+    color: #333;
+}
+
+#intersection {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    margin: 40px auto;
+    background: #bdc3c7;
+    border: 10px solid #7f8c8d;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Roads */
+.road { background: #34495e; position: absolute; }
+.road.vertical { width: 80px; height: 100%; left: 210px; }
+.road.horizontal { height: 80px; width: 100%; top: 210px; }
+
+/* Light Groups (Light + Timer) */
+.light-group {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+}
+
+.traffic-light {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #444;
+    border: 2px solid #222;
+    transition: background 0.3s ease;
+}
+
+.timer {
+    font-size: 12px;
+    font-weight: bold;
+    background: #000;
+    color: #0f0;
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin-bottom: 4px;
+    min-width: 20px;
+}
+
+/* Light Positioning */
+.light-group.north { top: 155px; left: 240px; }
+.light-group.south { bottom: 155px; left: 240px; }
+.light-group.east  { top: 230px; right: 155px; }
+.light-group.west  { top: 230px; left: 155px; }
+
+/* Vehicle Lanes & Flow Logic */
+.lane {
+    position: absolute;
+    display: flex;
+    gap: 6px;
+    padding: 5px;
+}
+
+/* North: Cars go DOWN. Front of line is at the bottom (210px) */
+.lane.north {
+    top: 0; left: 235px; height: 210px;
+    flex-direction: column-reverse; /* Spawn at top, Exit at bottom */
+}
+
+/* South: Cars go UP. Front of line is at the top (290px) */
+.lane.south {
+    bottom: 0; left: 250px; height: 210px;
+    flex-direction: column; /* Spawn at bottom, Exit at top */
+}
+
+/* East: Cars go LEFT. Front of line is at the left (290px) */
+.lane.east {
+    right: 0; top: 250px; width: 210px;
+    flex-direction: row; /* Spawn at right, Exit at left */
+}
+
+/* West: Cars go RIGHT. Front of line is at the right (210px) */
+.lane.west {
+    left: 0; top: 235px; width: 210px;
+    flex-direction: row-reverse; /* Spawn at left, Exit at right */
+}
+
+.vehicle {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    background: #f1c40f;
+    border: 1px solid #d35400;
+    flex-shrink: 0;
+}

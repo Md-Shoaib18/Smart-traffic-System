@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚦 Smart Traffic System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>🚦 Traffic Signal System</h1>
+
+    <div id="intersection">
+        <div class="road vertical"></div>
+        <div class="road horizontal"></div>
+
+        <div class="light-group north">
+            <div id="timer-0" class="timer">--</div>
+            <div id="light-0" class="traffic-light"></div>
+        </div>
+        <div class="light-group south">
+            <div id="timer-1" class="timer">--</div>
+            <div id="light-1" class="traffic-light"></div>
+        </div>
+        <div class="light-group east">
+            <div id="timer-2" class="timer">--</div>
+            <div id="light-2" class="traffic-light"></div>
+        </div>
+        <div class="light-group west">
+            <div id="timer-3" class="timer">--</div>
+            <div id="light-3" class="traffic-light"></div>
+        </div>
+
+        <div id="road-0" class="lane north"></div>
+        <div id="road-1" class="lane south"></div>
+        <div id="road-2" class="lane east"></div>
+        <div id="road-3" class="lane west"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

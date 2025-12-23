@@ -1,0 +1,9 @@
+com\traffic\app\util\VehicleGenerator.class
+com\traffic\app\controller\TestController.class
+com\traffic\app\model\TrafficStatus.class
+com\traffic\app\model\TrafficLight$Color.class
+com\traffic\app\service\SignalService.class
+com\traffic\app\controller\TrafficController.class
+com\traffic\app\TrafficSignalApplication.class
+com\traffic\app\model\Road.class
+com\traffic\app\model\TrafficLight.class
