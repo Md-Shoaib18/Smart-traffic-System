@@ -12,6 +12,11 @@ public class TestController {
 
     @GetMapping("/test")
     public String test() {
-        return "Mic Testing!";
+        return "Testing!";
+    }
+
+    @GetMapping("/traffic")
+    public String test() {
+        return "Traffic status working!";
     }
 }
